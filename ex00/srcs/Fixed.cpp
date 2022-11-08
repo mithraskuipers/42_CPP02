@@ -6,7 +6,7 @@
 /*   By: mkuipers <mkuipers@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/25 16:49:16 by mkuipers      #+#    #+#                 */
-/*   Updated: 2022/11/08 08:26:11 by mikuiper      ########   odam.nl         */
+/*   Updated: 2022/11/08 14:27:08 by mikuiper      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ Fixed::Fixed(const Fixed &Source)
 
 // Operator overloading via 'assignation operator'
 // Here we change the meaning (= overloading) of the equals sign (= operator)
-Fixed	&Fixed::operator=(Fixed const &Decimals)
+Fixed	&Fixed::operator=(Fixed const &Number)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedValue = Decimals.getRawBits();
+	this->_fixedValue = Number.getRawBits();
 	return (*this);
 }
 

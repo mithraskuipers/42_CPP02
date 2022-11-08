@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   Fixed.cpp                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: mkuipers <mkuipers@student.codam.nl>         +#+                     */
+/*   By: mikuiper <mikuiper@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/10/25 16:49:16 by mkuipers      #+#    #+#                 */
-/*   Updated: 2022/11/08 14:34:36 by mikuiper      ########   odam.nl         */
+/*   Created: 2022/11/08 14:37:56 by mikuiper      #+#    #+#                 */
+/*   Updated: 2022/11/08 14:37:57 by mikuiper      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ Fixed::Fixed(void)
 Fixed::Fixed(const int intValue)
 {
 	std::cout << "Int constructor called" << std::endl;
-	
 	// This will bitshift everything to the left, basically squaring it for each shifted bit.
 	this->_fixedValue = intValue * (1 << this->_fractionalBits);
 	return ;
@@ -37,7 +36,6 @@ Fixed::Fixed(const int intValue)
 Fixed::Fixed(const float floatValue)
 {
 	std::cout << "Float constructor called" << std::endl;
-
 	// This will bitshift everything to the left, basically squaring it for each shifted bit.
 	this->_fixedValue = roundf(floatValue * (1 << this->_fractionalBits));
 	return ;
@@ -52,10 +50,10 @@ Fixed::Fixed(const Fixed &Source)
 
 // Operator overloading via 'assignation operator'.
 // Here we change the meaning (= overloading) of the equals sign (= operator).
-Fixed	&Fixed::operator=(Fixed const &Decimals)
+Fixed	&Fixed::operator=(Fixed const &Number)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedValue = Decimals.getRawBits();
+	this->_fixedValue = Number.getRawBits();
 	return (*this);
 }
 
@@ -63,18 +61,18 @@ Fixed	&Fixed::operator=(Fixed const &Decimals)
 // Here we change the meaning (= overloading) of the insertion operator
 // Inserts a floating-point representation of the fixed-point number into the
 // output stream object passed as parameter.
-Fixed	&Fixed::operator<<(Fixed const &Decimals)
+Fixed	&Fixed::operator<<(Fixed const &Number)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedValue = Decimals.getRawBits();
+	this->_fixedValue = Number.getRawBits();
 	return (*this);
 }
 
 // This belongs to the << operator overloading above.
 // std::ostream can write sequences of characters 
-std::ostream	&operator<<(std::ostream &output, Fixed const &Decimals)
+std::ostream	&operator<<(std::ostream &output, Fixed const &Number)
 {
-	return (output << Decimals.toFloat());
+	return (output << Number.toFloat());
 }
 
 // Destructor.
@@ -115,4 +113,24 @@ int		Fixed::toInt(void) const
 float	Fixed::toFloat(void) const
 {
 	return (static_cast<float>(this->_fixedValue) / (1 << this->_fractionalBits));
+}
+
+Fixed		&Fixed::min(Fixed &a, Fixed &b)
+{
+	return (a < b) ? a : b;
+}
+
+Fixed const	&Fixed::min(Fixed const &a, Fixed const &b)
+{
+	return (a < b) ? a : b;
+}
+
+Fixed		&Fixed::max(Fixed &a, Fixed &b)
+{
+	return (a > b) ? a : b;
+}
+
+Fixed const	&Fixed::max(Fixed const &a, Fixed const &b)
+{
+	return (a > b) ? a : b;
 }
